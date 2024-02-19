@@ -1,4 +1,4 @@
-PROGS = pack_bytes unpack_bytes get_bitseq get_bitseq_signed merge merge_sort
+PROGS = pack_bytes unpack_bytes get_bitseq get_bitseq_signed int_to_str str_to_int
 
 PACKBYTES_OBJS = pack_bytes.o pack_bytes_c.o pack_bytes_s.o
 UNPACKBYTES_OBJS = unpack_bytes.o unpack_bytes_c.o unpack_bytes_s.o 
@@ -6,13 +6,14 @@ GET_BITSEQ_OBJS = get_bitseq.o get_bitseq_s.o get_bitseq_c.o
 GET_BITSEQ_SIGNED_OBJS = get_bitseq_signed.o\
 						 get_bitseq_signed_c.o get_bitseq_c.o\
                          get_bitseq_signed_s.o get_bitseq_s.o
-MERGE_OBJS = merge.o merge_c.o merge_util.o merge_s.o
-MERGE_SORT_OBJS = merge_sort.o merge_sort_c.o merge_sort_s.o \
-                  merge_c.o merge_util.o merge_s.o
+INT_TO_STR_OBJS = int_to_str.o int_to_str_c.o int_to_str_s.o\
+                  conv_util.o str_to_int_c.o
+STR_TO_INT_OBJS = str_to_int.o str_to_int_c.o str_to_int_s.o\
+                  conv_util.o
 
 OBJS = $(PACKBYTES_OBJS) $(UNPACKBYTES_OBJS) \
 	   $(GET_BITSEQ_OBJS) $(GET_BITSEQ_SIGNED_OBJS) \
-       $(MERGE_OBJS) $(MERGE_SORT_OBJS)
+       $(INT_TO_STR_OBJS) $(STR_TO_INT_OBJS)
 
 %.o: %.c
 	gcc -c -g -o $@ $<
@@ -35,10 +36,10 @@ get_bitseq: $(GET_BITSEQ_OBJS)
 get_bitseq_signed: $(GET_BITSEQ_SIGNED_OBJS)
 	gcc -g -o $@ $^
 
-merge: $(MERGE_OBJS) merge_util.h
+int_to_str: $(INT_TO_STR_OBJS)
 	gcc -g -o $@ $^
 
-merge_sort: $(MERGE_SORT_OBJS) merge_util.h
+str_to_int: $(STR_TO_INT_OBJS)
 	gcc -g -o $@ $^
 
 clean:
